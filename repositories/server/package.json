@@ -1,0 +1,20 @@
+{
+	"name": "server",
+	"version": "1.0.0",
+	"description": "the grpc test server",
+	"main": "app/index.js",
+	"author": "Felipe Zuntini <felipezuntini@hotmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"start": "export NODE_ENV=production && node app/index.js",
+		"monitor:dev": "export NODE_ENV=development && nodemon app/index.js",
+		"monitor:container": "export NODE_ENV=container && nodemon app/index.js"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.16"
+	},
+	"dependencies": {
+		"@grpc/grpc-js": "^1.6.7",
+		"@grpc/proto-loader": "^0.6.13"
+	}
+}
