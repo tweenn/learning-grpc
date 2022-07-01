@@ -2,24 +2,45 @@
 version: "3.7"
 
 services:
-  grpc-server:
-    build: ./server
-    image: node:16-alpine
-    command: [ash, -c, "cd /usr/src/ && npm run monitor:container"]
+  grpc_server:
+    build: ./
+    image: node:18-alpine
+    command: [ash, -c, "cd /usr/src/ && npm install && npm run monitor:container"]
     environment:
       - TZ=America/Sao_Paulo
-    ports:
-      - "4044:8080"
+    # ports:
+    #   - "4044:50051"
     networks:
-      - leraning_grpc
+      - learning_grpc
+    restart: always
     volumes:
-      # - ./app:/usr/src/app/
+      - ./containers/server/node_modules:/usr/src/node_modules/
+      - ./repositories/server/app:/usr/src/app/
       # - ./config:/usr/src/config/
-      # - ./node_modules:/usr/src/node_modules/
       # - ./.env.container:/usr/src/.env.container
-      - ./.env:/usr/src/.env
-      - ./package.json:/usr/src/package.json
-      # - ./package-lock.json:/usr/src/package-lock.json
+      - ./repositories/server/.env:/usr/src/.env
+      - ./repositories/server/package.json:/usr/src/package.json
+
+  grpc_client:
+    build: ./
+    image: node:18-alpine
+    command: [ash, -c, "cd /usr/src/ && npm install && npm run monitor:container"]
+    environment:
+      - TZ=America/Sao_Paulo
+    # ports:
+    #   - "4044:50051"
+    networks:
+      - learning_grpc
+    restart: always
+    volumes:
+      - ./containers/client/node_modules:/usr/src/node_modules/
+      - ./repositories/client/app:/usr/src/app/
+      # - ./config:/usr/src/config/
+      # - ./.env.container:/usr/src/.env.container
+      - ./repositories/client/.env:/usr/src/.env
+      - ./repositories/client/package.json:/usr/src/package.json
+    depends_on:
+      - grpc_server
 
 networks:
-  leraning_grpc:
+  learning_grpc:

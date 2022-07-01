@@ -1,8 +1,0 @@
-{
-  "name": "grpc-server",
-  "version": "1.0.0",
-  "description": "the grpc test server",
-  "main": "app/index.js",
-  "author": "Felipe Zuntini <felipezuntini@hotmail.com>",
-  "license": "MIT"
-}
