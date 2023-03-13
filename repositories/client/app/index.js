@@ -1,20 +1,15 @@
 
-const grpc = require('@grpc/grpc-js')
-const protoLoader = require('@grpc/proto-loader')
-const path = require('path')
+const HOST = '0.0.0.0';
+const PORT = 8080;
 
-const protoObject = protoLoader.loadSync(path.resolve(__dirname, './notes.proto'))
-const NotesDefinition = grpc.loadPackageDefinition(protoObject)
+// Run the server!
+require('./server')().listen({
+	port: PORT,
+	host: HOST
+}, (err, address) => {
+	if (err) throw err
 
-const client = new NotesDefinition.NoteService('server:50051', grpc.credentials.createInsecure())
-
-client.list({}, (err, notes) => {
-	if (err) throw err;
-	console.log('All notes:', notes);
-});
-
-client.find({ id: 2 }, (err, { note }) => {
-	if (err) return console.error(err.details);
-	if (!note) return console.error('Not Found');
-	return console.log('Single Note:', note);
-});
+	console.log('-----------');
+	console.log(`Client:\n💻 ${HOST}\n🚪 ${PORT}`)
+	console.log('-----------');
+})

@@ -14,7 +14,10 @@
 		"nodemon": "^2.0.16"
 	},
 	"dependencies": {
+		"@fastify/formbody": "^7.4.0",
 		"@grpc/grpc-js": "^1.6.7",
-		"@grpc/proto-loader": "^0.6.13"
+		"@grpc/proto-loader": "^0.6.13",
+		"fastify": "^4.14.1",
+		"qs": "^6.11.1"
 	}
 }

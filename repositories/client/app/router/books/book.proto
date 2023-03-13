@@ -1,0 +1,23 @@
+// books.proto
+syntax = "proto3";
+
+service BookService {
+	rpc Find (BookFindRequest) returns (BookFindResponse);
+}
+
+// Entidades
+message Void {}
+
+message Book {
+	string data = 1;
+}
+
+// Requests
+message BookFindRequest {
+	string jsonRequest = 1;
+}
+
+// Responses
+message BookFindResponse {
+	Book book = 1;
+}
