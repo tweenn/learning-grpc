@@ -6,7 +6,7 @@ const path = require('path')
 const protoObject = protoLoader.loadSync(path.resolve(__dirname, './notes.proto'))
 const NotesDefinition = grpc.loadPackageDefinition(protoObject)
 
-const client = new NotesDefinition.NoteService('grpc_server:50051', grpc.credentials.createInsecure())
+const client = new NotesDefinition.NoteService('server:50051', grpc.credentials.createInsecure())
 
 client.list({}, (err, notes) => {
 	if (err) throw err;

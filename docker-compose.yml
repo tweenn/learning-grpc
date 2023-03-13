@@ -1,8 +1,9 @@
 ---
 version: "3.7"
 
+name: learning_grpc
 services:
-  grpc_server:
+  server:
     build: ./
     image: node:18-alpine
     command: [ash, -c, "cd /usr/src/ && npm install && npm run monitor:container"]
@@ -21,7 +22,7 @@ services:
       - ./repositories/server/.env:/usr/src/.env
       - ./repositories/server/package.json:/usr/src/package.json
 
-  grpc_client:
+  client:
     build: ./
     image: node:18-alpine
     command: [ash, -c, "cd /usr/src/ && npm install && npm run monitor:container"]
@@ -40,7 +41,7 @@ services:
       - ./repositories/client/.env:/usr/src/.env
       - ./repositories/client/package.json:/usr/src/package.json
     depends_on:
-      - grpc_server
+      - server
 
 networks:
   learning_grpc:
